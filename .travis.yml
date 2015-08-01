@@ -2,7 +2,7 @@ os: osx
 osx_image: xcode6.4
 
 install:
-  - ./build/luajit.sh
+  - bash build/luajit.sh
 
 deploy:
   provider: releases
