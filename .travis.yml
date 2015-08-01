@@ -1,0 +1,26 @@
+os: osx
+osx_image: xcode6.4
+
+env:
+  - IXCODE=`xcode-select -print-path`
+  - ISDK=$IXCODE/Platforms/iPhoneOS.platform/Developer
+  - ISDKVER=iPhoneOS8.4.sdk
+  - ISDKP=/usr/bin/
+  - ISDKF="-arch armv7 -isysroot $ISDK/SDKs/$ISDKVER"
+
+before_install:
+  - wget -O - http://luajit.org/download/LuaJIT-2.0.4.tar.gz | tar xz
+
+install:
+  - cd LuaJIT-2.0.4 && make HOST_CC="gcc -m32 -arch i386" CROSS=$ISDKP TARGET_FLAGS="$ISDKF" TARGET_SYS=iOS
+
+deploy:
+  provider: releases
+  api_key:
+    secure: tm12KBanvaXssoAhjVs63BTaz+Solysgu8dCqIgZSNXp/L1yuhUiG1KZIQn6fztfC4beMlpsYwfRfZXVVk/h7UiIn0/lvzf14s4/EytYwlQlLJgCFtXVQprXHJ4vd0QXutz2Am29qoQAxqx/fcxUKW6eCIFfbohxNVBDGEG5uOWFTzjW8/HiiJC9A5UVL6pZQg4it7PwmnVJgQwwmW0f5MxF52enpXMrYx+TSXPVwhnW2tI75iST/t5E2Ff3jeeQKWKC7TB/eRZ7kDkjm31q2jY5X2Cit1UxdZIuChiO+sG49hQE+K3tnFiRKbORgVdWm8i4wpjdF4rtilzwlj9PpjskmA/kVxe5CwCdrIOzTaOuuwxqvvo9Cby9BkoL+NUmoin7UM7XiVc74VZprC2jz2GHcr0fdSDoj92/LCjYygy8c04aKAJELLmzvqR8tmi53lJRy2KjZlxNID8rUE1LmPPYMcR3HmzwdaW5HX9Hydz/RAgk5DfIBnckpz19rhRElNqaLqA5hJSJGDuLMAiLUWlWY5n+IKMZWFLKu0A6EgpT2eqDNLgZ13/iMT+AyhiunYDD9Da1eHldAXLkIUL/cggBezeLHm73zOc107CPNcubVCXMRct6z9vyWiW4T0V+jTvTbPpOlC9UdsLTfjvV0+LTAM61Y+aHkGK2hbtRawE=
+  file:
+    - "LuaJIT-2.0.4/src/libluajit.a"
+    - "LuaJIT-2.0.4/src/libluajit.so"
+  skip_cleanup: true
+  on:
+    tags: true
