@@ -1,18 +1,8 @@
 os: osx
 osx_image: xcode6.4
 
-env:
-  - IXCODE=`xcode-select -print-path`
-  - ISDK=$IXCODE/Platforms/iPhoneOS.platform/Developer
-  - ISDKVER=iPhoneOS8.4.sdk
-  - ISDKP=/usr/bin/
-  - ISDKF="-arch armv7 -isysroot $ISDK/SDKs/$ISDKVER"
-
-before_install:
-  - wget -O - http://luajit.org/download/LuaJIT-2.0.4.tar.gz | tar xz
-
 install:
-  - cd LuaJIT-2.0.4 && make HOST_CC="gcc -m32 -arch i386" CROSS=$ISDKP TARGET_FLAGS="$ISDKF" TARGET_SYS=iOS
+  - ./build/luajit.sh
 
 deploy:
   provider: releases
