@@ -15,7 +15,7 @@ wget -O - http://luajit.org/download/$LUAJIT_VERSION.tar.gz | tar xz
 
 cd "$LUAJIT_VERSION"
 mkdir -p bin
-mkdir -p bin/includes
+mkdir -p bin/include/lua
 
 ISDKF="-arch arm64 -isysroot $ISDK/SDKs/$ISDKVER"
 make clean
@@ -57,11 +57,11 @@ make HOST_CC="clang -m64 -arch x86_64" CROSS=$ISDKP TARGET_FLAGS="$ISDKF" \
 cp src/libluajit.a bin/libluajit_x64_sim.a
 cp src/libluajit.so bin/libluajit_x64_sim.so
 
-cp src/lauxlib.h bin/includes
-cp src/lua.h bin/includes
-cp src/luaconf.h bin/includes
-cp src/lualib.h bin/includes
-cp src/luajit.h bin/includes
+cp src/lauxlib.h bin/include/lua
+cp src/lua.h bin/include/lua
+cp src/luaconf.h bin/include/lua
+cp src/lualib.h bin/include/lua
+cp src/luajit.h bin/include/lua
 
 lipo -create -output bin/libluajit-$LUAJIT_VERSION_NUM.a \
   bin/libluajit_arm64.a \
@@ -71,4 +71,4 @@ lipo -create -output bin/libluajit-$LUAJIT_VERSION_NUM.a \
   bin/libluajit_x64_sim.a
 
 cd bin
-tar -zcvf $LUAJIT_VERSION.tar.gz includes libluajit-$LUAJIT_VERSION_NUM.a
+tar -zcvf $LUAJIT_VERSION.tar.gz include libluajit-$LUAJIT_VERSION_NUM.a
