@@ -2,8 +2,8 @@
 
 LUAJIT_VERSION_NUM=2.1.0-beta1
 LUAJIT_VERSION=LuaJIT-$LUAJIT_VERSION_NUM
-ISDKVER=iPhoneOS8.4.sdk
-ISDKSIMVER=iPhoneSimulator8.4.sdk
+ISDKVER=iPhoneOS8.1.sdk
+ISDKSIMVER=iPhoneSimulator8.1.sdk
 
 IXCODE=/Applications/Xcode.app/Contents/Developer
 ISDK=$IXCODE/Platforms/iPhoneOS.platform/Developer

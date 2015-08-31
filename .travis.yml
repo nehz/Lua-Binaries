@@ -1,6 +1,5 @@
 language: objective-c
 os: osx
-osx_image: xcode6.4
 
 install:
   - bash build/luajit.sh
